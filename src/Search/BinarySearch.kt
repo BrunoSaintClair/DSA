@@ -3,17 +3,17 @@ package Search
 fun binarySearch(array: IntArray, target: Int): Int {
     var low = 0
     var high = array.size - 1
-    var middle: Int
 
     while (low <= high) {
-        middle = low + (high - low) / 2  // como é uma divisão entre inteiros, no Kotlin o resultado é arredondado
+        val middleIdx = low + (high - low) / 2  // como é uma divisão entre inteiros, no Kotlin o resultado é arredondado
+        val middleItem = array[middleIdx]
 
-        if (array[middle] == target) {
-            return middle
-        } else if (array[middle] < target) {
-            low = middle + 1
+        if (middleItem == target) {
+            return middleIdx
+        } else if (middleItem < target) {
+            low = middleIdx + 1
         } else {
-            high = middle
+            high = middleIdx - 1
         }
     }
     return -1

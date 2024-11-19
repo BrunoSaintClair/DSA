@@ -15,6 +15,8 @@ Exemplos:
 * O(n log n) == quicksort
 * O(log n) == árvores de busca binária
 
+Na notação de Big O, log == log na base 2
+
 ## Array x Linked List
 
 ### Array:

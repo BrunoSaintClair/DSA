@@ -1,6 +1,6 @@
 package DataStructures.Sort
 
-fun quicksort(array: Array<Int>, low: Int = 0, high: Int = array.size -1){
+fun quicksort(array: IntArray, low: Int = 0, high: Int = array.size -1){
     if (low >= high) {
         return
     }
@@ -10,8 +10,8 @@ fun quicksort(array: Array<Int>, low: Int = 0, high: Int = array.size -1){
     quicksort(array, pivotIdx + 1, high)
 }
 
-fun partition(array: Array<Int>, low: Int = 0, high: Int = array.size - 1): Int {
-    val pivot: Int = array[high]
+fun partition(array: IntArray, low: Int = 0, high: Int = array.size - 1): Int {
+    val pivot = array[high]
     var idx = low - 1
 
     for (i in low until high) {
