@@ -1,55 +1,153 @@
 package DataStructures
 
-class SinglyLinkedList<T> {
-    private var head: Node<T>? = null
-    private var tail: Node<T>? = null
-    private var size: Int = 0
+open class Linkedlist<T> {
+	var head: Node<T>? = null
+	var tail: Node<T>? = null
+	var length: Int = 0
 
-    fun get(index: Int): T? {
-        if (index < 0 || index >= size) {
-            return null
-        }
-        var current = head
+	fun isEmpty(): Boolean = length == 0
+	fun getSize(): Int = length
 
-        for (i in 0 until index) {
-            current = current!!.next
-        }
+	fun get(index: Int): T? {
+		if (index < 0 || index >= length) {
+			throw IndexOutOfBoundsException()
+		}
 
-        return current?.value
-    }
+		var current = head
+		for (i in 0 until index) {
+			current = current?.next
+		}
 
+		return current?.value
+	}
 
-    fun isEmpty(): Boolean = size == 0
+	open fun prepend(item: T) { // Adicionar no início
+		val newNode = Node(item)
 
+		if (head == null) {
+			head = newNode
+			tail = newNode
+		} else {
+			newNode.next = head
+			head = newNode
+		}
 
+		length++
+	}
+
+	open fun append(item: T) { // Adicionar no fim
+		val newNode = Node(item)
+
+		if (head == null) {
+			head = newNode
+			tail = newNode
+		} else {
+			tail!!.next = newNode
+			tail = newNode
+		}
+
+		length++
+	}
+
+	open fun insertAt(index: Int, item: T) {
+		if (index < 0 || index > length) {
+			throw IndexOutOfBoundsException()
+		} else if (index == length) {
+			this.append(item)
+		} else if (index == 0) {
+			this.prepend(item)
+		} else {
+			var current = head
+			for (i in 0 until  index - 1) {
+				current = current!!.next
+			}
+
+			val newNode = Node(item)
+			newNode.next = current!!.next
+			current.next = newNode
+
+			if (newNode.next == null) {
+				tail = newNode
+			}
+
+			length++
+		}
+	}
 }
-class DoublyLinkedList<T> {
-    private var head: Node<T>? = null
-    private var tail: Node<T>? = null
-    private var size: Int = 0
 
-    fun get(index: Int): T? {
-        if (index < 0 || index >= size) {
-            return null
-        }
-        var current = head
 
-        for (i in 0 until index) {
-            current = current!!.next
-        }
 
-        return current?.value
-    }
 
-    fun isEmpty(): Boolean = size == 0
 
+//   LISTA DUPLAMENTE LIGADA:
+
+
+class DoublyLinkedList<T> : Linkedlist<T>(){
+    override fun prepend(item: T){
+		val newNode = Node(item)
+		length++
+
+
+		if (head == null) {
+			head = newNode
+			tail = newNode
+			return
+		}
+
+		newNode.next = head
+		head!!.previous = newNode
+		head = newNode
+	}
+
+	override fun append(item: T){
+		val newNode = Node(item)
+		length++
+
+		if (head == null) {
+			head = newNode
+			tail = newNode
+			return
+		}
+
+		tail!!.next = newNode
+		newNode.previous = tail
+		tail = newNode
+
+	}
+
+	override fun insertAt(index: Int, item: T){
+		if (index < 0 || index > length) {
+			throw IndexOutOfBoundsException()
+		} else if (index == length) {
+			this.append(item)
+		} else if (index == 0) {
+			this.prepend(item)
+		} else {
+			var current = head
+			for (i in 0 until index) {
+				current = current!!.next
+			}
+
+			current = current as Node<T>
+
+			val newNode = Node(item)
+			val previousNode = current.previous
+
+			previousNode?.next = newNode
+			newNode.previous = previousNode
+			newNode.next = current
+			current.previous = newNode
+			length++
+		}
+	}
 }
+
 
 /*
 OPERAÇÕES:
-    - add no inicio, no fim, e em posição específica
+    - add no inicio, no fim, e em posição específica | FEITO
     - delete no inicio, no fim, e em posição específica
-    - retornar tamanho
+    - retornar tamanho | FEITO
     - buscar nó por valor
     - buscar um nó específico e alterar o valor dele
     - inverter
