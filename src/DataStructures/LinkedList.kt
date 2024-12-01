@@ -1,6 +1,6 @@
 package DataStructures
 
-open class Linkedlist<T> {
+open class LinkedList<T> {
 	var head: Node<T>? = null
 	var tail: Node<T>? = null
 	var length: Int = 0
@@ -32,7 +32,7 @@ open class Linkedlist<T> {
 			head = newNode
 		}
 
-		length++
+		length ++
 	}
 
 	open fun append(item: T) { // Adicionar no fim
@@ -42,11 +42,11 @@ open class Linkedlist<T> {
 			head = newNode
 			tail = newNode
 		} else {
-			tail!!.next = newNode
+			tail !!.next = newNode
 			tail = newNode
 		}
 
-		length++
+		length ++
 	}
 
 	open fun insertAt(index: Int, item: T) {
@@ -58,23 +58,52 @@ open class Linkedlist<T> {
 			this.prepend(item)
 		} else {
 			var current = head
-			for (i in 0 until  index - 1) {
-				current = current!!.next
+			for (i in 0 until index - 1) {
+				current = current !!.next
 			}
 
 			val newNode = Node(item)
-			newNode.next = current!!.next
+			newNode.next = current !!.next
 			current.next = newNode
 
 			if (newNode.next == null) {
 				tail = newNode
 			}
 
-			length++
+			length ++
 		}
 	}
-}
 
+	open fun revert(): Node<T>?{
+		var new_list: Node<T>? = null
+		tail = head
+
+		while (head != null) {
+			val next_node = head?.next
+			head?.next = new_list
+			new_list = head
+			head = next_node
+		}
+
+		head = new_list
+		return head
+	}
+
+	fun printList() {
+		var current = head
+		println("Head: ${head?.value}, Tail: ${tail?.value}, Length: $length")
+
+		while (current != null) {
+			print("${current.value}")
+			current = current.next
+			if (current != null) {
+				print(" -> ")
+			}
+		}
+
+		println()
+	}
+}
 
 
 
@@ -82,10 +111,10 @@ open class Linkedlist<T> {
 //   LISTA DUPLAMENTE LIGADA:
 
 
-class DoublyLinkedList<T> : Linkedlist<T>(){
-    override fun prepend(item: T){
+class DoublyLinkedList<T> : LinkedList<T>() {
+	override fun prepend(item: T) {
 		val newNode = Node(item)
-		length++
+		length ++
 
 
 		if (head == null) {
@@ -95,13 +124,13 @@ class DoublyLinkedList<T> : Linkedlist<T>(){
 		}
 
 		newNode.next = head
-		head!!.previous = newNode
+		head !!.previous = newNode
 		head = newNode
 	}
 
-	override fun append(item: T){
+	override fun append(item: T) {
 		val newNode = Node(item)
-		length++
+		length ++
 
 		if (head == null) {
 			head = newNode
@@ -109,13 +138,13 @@ class DoublyLinkedList<T> : Linkedlist<T>(){
 			return
 		}
 
-		tail!!.next = newNode
+		tail !!.next = newNode
 		newNode.previous = tail
 		tail = newNode
 
 	}
 
-	override fun insertAt(index: Int, item: T){
+	override fun insertAt(index: Int, item: T) {
 		if (index < 0 || index > length) {
 			throw IndexOutOfBoundsException()
 		} else if (index == length) {
@@ -125,7 +154,7 @@ class DoublyLinkedList<T> : Linkedlist<T>(){
 		} else {
 			var current = head
 			for (i in 0 until index) {
-				current = current!!.next
+				current = current !!.next
 			}
 
 			current = current as Node<T>
@@ -137,7 +166,7 @@ class DoublyLinkedList<T> : Linkedlist<T>(){
 			newNode.previous = previousNode
 			newNode.next = current
 			current.previous = newNode
-			length++
+			length ++
 		}
 	}
 }

@@ -8,7 +8,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test append adds item to end of list`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 		list.append(20)
 
@@ -20,7 +20,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test prepend adds item to start of list`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.prepend(10)
 		list.prepend(20)
 
@@ -31,7 +31,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test insertAt adds item at specific index`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 		list.append(30)
 		list.insertAt(1, 20)
@@ -44,7 +44,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test insertAt at index 0 behaves like prepend`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 		list.insertAt(0, 5)
 
@@ -54,7 +54,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test insertAt throws exception for invalid index`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 
 		assertThrows<IndexOutOfBoundsException> {
@@ -64,7 +64,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test get retrieves correct item`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 		list.append(20)
 		list.append(30)
@@ -76,7 +76,7 @@ class LinkedListTest {
 
 	@Test
 	fun `test get throws exception for invalid index`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 
 		assertThrows<IndexOutOfBoundsException> {
@@ -86,13 +86,13 @@ class LinkedListTest {
 
 	@Test
 	fun `test isEmpty returns true for empty list`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		assertTrue(list.isEmpty())
 	}
 
 	@Test
 	fun `test isEmpty returns false for non-empty list`() {
-		val list = Linkedlist<Int>()
+		val list = LinkedList<Int>()
 		list.append(10)
 		assertFalse(list.isEmpty())
 	}
