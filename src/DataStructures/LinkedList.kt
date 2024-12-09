@@ -89,6 +89,18 @@ open class LinkedList<T> {
 		return head
 	}
 
+	fun deleteHead(): T? {
+		if (head == null){
+			return null
+		}
+
+		val old_head = head!!.value
+		head = head?.next
+
+		length--
+		return old_head
+	}
+
 	fun printList() {
 		var current = head
 		println("Head: ${head?.value}, Tail: ${tail?.value}, Length: $length")
@@ -175,11 +187,11 @@ class DoublyLinkedList<T> : LinkedList<T>() {
 /*
 OPERAÇÕES:
     - add no inicio, no fim, e em posição específica | FEITO
-    - delete no inicio, no fim, e em posição específica
+    - delete no inicio | FEITO, no fim, e em posição específica
     - retornar tamanho | FEITO
     - buscar nó por valor
     - buscar um nó específico e alterar o valor dele
-    - inverter
+    - inverter | FEITO
  */
 
 /* Não possui índice
