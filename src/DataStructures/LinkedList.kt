@@ -8,7 +8,7 @@ open class LinkedList<T> {
 	fun isEmpty(): Boolean = length == 0
 	fun getSize(): Int = length
 
-	fun get(index: Int): T? {
+	fun get(index: Int): Node<T>? {
 		if (index < 0 || index >= length) {
 			throw IndexOutOfBoundsException()
 		}
@@ -18,7 +18,7 @@ open class LinkedList<T> {
 			current = current?.next
 		}
 
-		return current?.value
+		return current
 	}
 
 	open fun prepend(item: T) { // Adicionar no início
@@ -141,6 +141,12 @@ open class LinkedList<T> {
 
 		println()
 	}
+
+	fun updateValueByIndex(index: Int, newValue: T) {
+		val node = get(index) ?: throw IndexOutOfBoundsException()
+		node.value = newValue
+	}
+
 }
 
 
@@ -234,8 +240,7 @@ OPERAÇÕES:
     - add no inicio, no fim, e em posição específica | FEITO
     - delete no inicio | FEITO, no fim | FEITO, e em posição específica
     - retornar tamanho | FEITO
-    - buscar nó por valor
-    - buscar um nó específico e alterar o valor dele
+    - buscar um nó específico e alterar o valor dele | FEITO
     - inverter | FEITO
  */
 
