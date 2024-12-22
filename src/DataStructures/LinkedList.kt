@@ -32,7 +32,7 @@ open class LinkedList<T> {
 			head = newNode
 		}
 
-		length ++
+		length++
 	}
 
 	open fun append(item: T) { // Adicionar no fim
@@ -42,7 +42,7 @@ open class LinkedList<T> {
 			head = newNode
 			tail = newNode
 		} else {
-			tail !!.next = newNode
+			tail!!.next = newNode
 			tail = newNode
 		}
 
@@ -89,16 +89,42 @@ open class LinkedList<T> {
 		return head
 	}
 
-	fun deleteHead(): T? {
+	fun deleteHead(): T? {    // O(1)
 		if (head == null){
 			return null
 		}
 
-		val old_head = head!!.value
-		head = head?.next
+		val old_head_value = head!!.value
+		head = head!!.next
 
 		length--
-		return old_head
+		return old_head_value
+	}
+
+	open fun deleteTail(): T? {
+		if (tail == null){
+			return null
+		}
+
+		if (head == tail) {
+			val oldTailValue = tail?.value
+			head = null
+			tail = null
+			length--
+			return oldTailValue
+		}
+
+		var curr = head
+		while (curr?.next != tail) {
+			curr = curr!!.next
+		}
+
+		val old_tail = tail
+		curr?.next = null
+		tail = curr
+
+		length--
+		return old_tail?.value
 	}
 
 	fun printList() {
@@ -126,8 +152,7 @@ open class LinkedList<T> {
 class DoublyLinkedList<T> : LinkedList<T>() {
 	override fun prepend(item: T) {
 		val newNode = Node(item)
-		length ++
-
+		length++
 
 		if (head == null) {
 			head = newNode
@@ -136,13 +161,13 @@ class DoublyLinkedList<T> : LinkedList<T>() {
 		}
 
 		newNode.next = head
-		head !!.previous = newNode
+		head!!.previous = newNode
 		head = newNode
 	}
 
 	override fun append(item: T) {
 		val newNode = Node(item)
-		length ++
+		length++
 
 		if (head == null) {
 			head = newNode
@@ -150,7 +175,7 @@ class DoublyLinkedList<T> : LinkedList<T>() {
 			return
 		}
 
-		tail !!.next = newNode
+		tail!!.next = newNode
 		newNode.previous = tail
 		tail = newNode
 
@@ -178,8 +203,28 @@ class DoublyLinkedList<T> : LinkedList<T>() {
 			newNode.previous = previousNode
 			newNode.next = current
 			current.previous = newNode
-			length ++
+			length++
 		}
+	}
+
+	override fun deleteTail(): T? {
+		if (tail == null){
+			return null
+		}
+
+		val old_tail = tail
+		tail = tail?.previous
+
+		if (tail == null) {
+			head = null
+		} else {
+			tail!!.next = null
+		}
+
+		old_tail!!.previous = null
+		length--
+
+		return old_tail.value
 	}
 }
 
@@ -187,7 +232,7 @@ class DoublyLinkedList<T> : LinkedList<T>() {
 /*
 OPERAÇÕES:
     - add no inicio, no fim, e em posição específica | FEITO
-    - delete no inicio | FEITO, no fim, e em posição específica
+    - delete no inicio | FEITO, no fim | FEITO, e em posição específica
     - retornar tamanho | FEITO
     - buscar nó por valor
     - buscar um nó específico e alterar o valor dele
@@ -195,4 +240,4 @@ OPERAÇÕES:
  */
 
 /* Não possui índice
-   Para adicionar ou excluir elementos vc tem q gerenciar os "next" e os "previous" em volta */
+   Para adicionar ou excluir elementos você tem que gerenciar os "next" e os "previous" em volta */
