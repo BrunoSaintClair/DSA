@@ -176,6 +176,20 @@ open class LinkedList<T> {
 		println()
 	}
 
+	fun getMiddle(): Node<T>?{
+		if (head == null) return null
+
+		var slow = head
+		var fast = head
+
+		while (fast != null && fast.next != null) {
+			slow = slow?.next
+			fast = fast.next?.next
+		}
+
+		return slow
+	}
+
 }
 
 
@@ -303,6 +317,7 @@ OPERAÇÕES:
 - deleteTail: Remove o último elemento da lista. Complexidade: O(n) (na lista simples) ou O(1) (na lista duplamente ligada)
 - removeAt: Remove um elemento em uma posição específica. Complexidade: O(n)
 - printList: Exibe os elementos da lista. Complexidade: O(n)
+- getMiddle: Retorna o nó do meio da linkedlist(utilizando a técnica de two pointers). Complexidade: O(n)
 - updateAt: Atualiza o valor de um nó na posição especificada. Complexidade: O(n)
 - find: Localiza um nó com base no valor. Complexidade: O(n)
 
