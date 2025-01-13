@@ -1,5 +1,0 @@
-package DataStructures
-
-fun main() {
-
-}
